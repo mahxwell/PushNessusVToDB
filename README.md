@@ -1,6 +1,6 @@
 # PushNessusVulnerabitiliesToDB
 
-Push collected data from generated xlsx file (from NessusFileToXls script) to Database (find MDP in doc repertory for more details)
+Push collected data from generated xlsx file (from NessusFileToXls script) to NessusVulnerabilities Database (find MDP in doc repertory for more details)
 
 Usage:
 
