@@ -3,17 +3,25 @@ import ip_address_tests as ip_test
 import mariadb_query as query
 import sys
 
+## Main Function App
+
 if __name__ == '__main__':
+    ### Check existing argv -> path to the xlsx file to parse
     if len(sys.argv) > 1:
-        print(sys.argv[1])
+
+        ### Get absolute path to xlsx file
+
         path_to_file_to_parse = sys.argv[1]
+
+        ### Fill profile_list by parsing xlsx file
+
         profile_list = xls.parse_xls(str(path_to_file_to_parse))
 
-        # Fill Data Base with collected data
+        # Fill Data Base with collected data in profile_list
 
         query.launch_data_push(profile_list)
 
-        # launch tests
+        # launch tests uncomment
 
         #ip_test.test_profile_content(profile_list)
     else:

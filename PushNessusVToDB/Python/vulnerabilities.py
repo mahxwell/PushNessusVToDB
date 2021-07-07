@@ -1,7 +1,19 @@
 import strings
 
+## Create a vulnerability nbr list
 
 def vulnerabilities_nbr_spe_list(data_xls, ip_address):
+    ### Instead of creating vulnerability obj, fill vulnerability nbr into a list -> vulnerabilities_list
+    ### vulnerabilities_list[0] -> total vulnerability nbr
+    ### vulnerabilities_list[1] -> critical vulnerability nbr
+    ### vulnerabilities_list[2] -> high vulnerability nbr
+    ### vulnerabilities_list[3] -> medium vulnerability nbr
+
+    ### Note in parsed excel file, severity is ranked as:
+    ### 4 -> critical vulnerability
+    ### 3 -> high vulnerability
+    ### 2 -> medium vulnerability
+
     vulnerabilities_list = [0, 0, 0, 0]
     critical_nbr = 0
     high_nbr = 0

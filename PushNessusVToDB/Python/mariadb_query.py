@@ -2,6 +2,8 @@ import strings
 import mariadb
 import sys
 
+## Maria DB connection and queries functions
+
 
 def mariadb_queries(profile_list):
     # Connect to MariaDB Platform
@@ -27,8 +29,12 @@ def mariadb_queries(profile_list):
     connection.close()
     return cur
 
+### Fill spilt ip rows ip1, ip2, ip3, ip4 with contents from 1 to 255
+### Beware 0 is at index 256
+
 
 def fill_ip_spilt_table_rows(cur, connection):
+    ## ip_table_list -> prepare split ip tables from 1 to 4
     ip_table_list = ["1", "2", "3", "4"]
     for i in range(len(ip_table_list)):
         mask = 1
@@ -46,16 +52,22 @@ def fill_ip_spilt_table_rows(cur, connection):
     connection.commit()
 
 
-def push_ip_address_to_db(cur,connection, profile_list):
+## Push Ip obj to DB
 
+def push_ip_address_to_db(cur, connection, profile_list):
+
+### Get attributes from Ip Obj
     for i in range(len(profile_list)):
         ip1 = getattr(profile_list[i], "ip_1")
         ip2 = getattr(profile_list[i], "ip_2")
         ip3 = getattr(profile_list[i], "ip_3")
         ip4 = getattr(profile_list[i], "ip_4")
 
+### Concat ip1, ip2, ip3 and ip4 attribute to create ip address
+
         ip_address = str(ip1) + '.' + str(ip2) + '.' + str(ip3) + '.' + str(ip4)
 
+### Push all informations into DB
         try:
             cur.execute(
                 "INSERT INTO ip (idip, ip_description, ip1_idip1, ip2_idip2, ip3_idip3, ip4_idip4)"
@@ -65,8 +77,11 @@ def push_ip_address_to_db(cur,connection, profile_list):
     connection.commit()
 
 
+## Push vulnerabilities nbr to db
+
 def push_vulnerabilities_nbr_to_db(cur, connection, profile_list):
 
+    ### Get vulnerabilities nbr informations from IP address
     for i in range(len(profile_list)):
         ip1 = getattr(profile_list[i], "ip_1")
         ip2 = getattr(profile_list[i], "ip_2")
@@ -77,6 +92,7 @@ def push_vulnerabilities_nbr_to_db(cur, connection, profile_list):
         high_nbr = getattr(profile_list[i], "nbr_high")
         medium_nbr = getattr(profile_list[i], "nbr_medium")
 
+        ### Push vulnerabilities informations to DB
         try:
             cur.execute(
                 "INSERT INTO vulnerabilities (idvulnerabilities_nbr, total_vulnerabilities, medium_vulnerabilities,"
@@ -89,6 +105,7 @@ def push_vulnerabilities_nbr_to_db(cur, connection, profile_list):
 
     connection.commit()
 
+## Maria DB query launcher
 
 def launch_data_push(profile_list):
     mariadb_queries(profile_list)

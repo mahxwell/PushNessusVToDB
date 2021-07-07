@@ -6,7 +6,7 @@ IP_ADDRESS = "IP Address"
 FQDN = "FQDN"
 SEVERITY = "Severity"
 
-### STRINGS FOR DB CONNECTION
+### STRINGS FOR DB CONNECTION -> Modify informations here
 
 USER ="msoro"
 PASSWORD = "toto"

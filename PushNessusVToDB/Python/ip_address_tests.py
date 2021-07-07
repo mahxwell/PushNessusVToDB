@@ -1,7 +1,10 @@
-## Test File for Ip_address parsing
+#Test File for Ip_address parsing
 
+
+## Show contents of IP address object
 
 def test_profile_content(profile_list):
+    ### Get obj Attribute
     for i in range(len(profile_list)):
         ip = getattr(profile_list[i], "ip")
         ip_1 = getattr(profile_list[i], "ip_1")
@@ -13,7 +16,7 @@ def test_profile_content(profile_list):
         high_nbr = getattr(profile_list[i], "nbr_high")
         medium_nbr = getattr(profile_list[i], "nbr_medium")
         fqdn = getattr(profile_list[i], "fqdn")
-
+    ### Print IP obj
         print("ip = " + str(ip))
         print("ip1 = " + str(ip_1))
         print("ip2 = " + str(ip_2))
